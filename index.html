@@ -1,0 +1,50 @@
+<!doctype html>
+<head>
+  <title>Connect 4</title>
+  <link href="CSS-JS/connect4.css" rel="stylesheet">
+</head>
+<body>
+  <div id="top">
+    <div>
+      <h1>Connect 4</h1>
+    </div>
+  </div>
+  
+  <div id="playArea">
+    <span class="score p1">
+      <h3>Player 1 Score</h3>
+      <div id='p1Score'></div>
+    </span>
+    <span class="score p2">
+      <h3>Player 2 Score</h3>
+      <div id='p2Score'></div>
+    </span>
+    <div id="buttons">
+      <button id="reset" class="gameButton">Reset</button>
+      <button id="newPlayers" class="gameButton">New Players</button>
+      <form>
+        <button formaction="#winStyles" id="wins" class="gameButton">Try More Win-styles</button>
+      </form>
+    </div>
+      <div id="game">
+        <table id="board"></table>
+      </div>
+      <div id="moreWins">
+        <a name="winStyles"></a>
+        <h2>Additional win types</h2>
+        <p>Choose additional win classes by checking the box(es)</p>
+        <div class="winType">
+          <label for="square">Win by Square: 4 pieces forming a square</label>
+          <input type="checkbox" id="square" name="square">
+        </div>
+          <div class="winType">
+            <label for="fourCorners">Win by 4 Corners: happen to get your pieces in the 4 corners</label>
+            <input type="checkbox" id="fourCorners" name="fourCorners">
+          </div>
+      </div>
+  </div>  
+  
+<script src="CSS-JS/connect4.js"></script>
+
+</body>
+</html>
