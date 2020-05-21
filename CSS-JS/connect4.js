@@ -22,7 +22,7 @@ const newPlayersBtn = document.querySelector('#newPlayers');
 newPlayersBtn.addEventListener('click', newPlayers);
 
 //TODO: remove anchor tag from URL for page refresh
-const winStylesBtn = document.getElementById('wins');
+// const winStylesBtn = document.getElementById('wins');
 // newPlayersBtn.addEventListener('click', winStyles);
 
 const squareCheckbox = document.getElementById('square');
@@ -43,7 +43,7 @@ function newGame() {
 	gameOver = false;
 	squareCheckbox.disabled = false;
 	fourCornersCheckbox.disabled = false;
-	winStylesBtn.disabled = false;
+	// winStylesBtn.disabled = false;
 	makeBoard();
 	makeHtmlBoard();
 
@@ -65,7 +65,7 @@ function newPlayers() {
 	gameOver = false;
 	squareCheckbox.disabled = false;
 	fourCornersCheckbox.disabled = false;
-	winStylesBtn.disabled = false;
+	// winStylesBtn.disabled = false;
 	makeBoard();
 	makeHtmlBoard();
 
@@ -148,7 +148,9 @@ function placeInTable(y, x) {
 	//do not allow additional win styles to be selected once a piece is played
 	squareCheckbox.disabled = true;
 	fourCornersCheckbox.disabled = true;
-	winStylesBtn.disabled = true;
+
+	//do not go to more win styles once game is started
+	// winStylesBtn.disabled = true;
 
 	const cell = document.getElementById(`${y}-${x}`);
 	cell.append(placed);

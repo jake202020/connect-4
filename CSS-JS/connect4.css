@@ -1,6 +1,6 @@
-html { 
+/* html { 
   scroll-behavior: smooth; 
-}
+} */
 
 #top {
   text-align: center;
@@ -15,14 +15,10 @@ h1 {
   margin: 1%;
 }
 
-.winType {
-  display: block;
-  border: 1px solid black;
-  margin: auto;
-  margin-top: 10px;
-  padding: 1%;
-  border-radius: 4px;
-  width: 25%;
+.note {
+  font-family: sans-serif;
+  font-size: .75em;
+  font-style: italic;
 }
 
 #playArea{
@@ -129,4 +125,14 @@ button:hover{
   height: 80%;
   border-radius: 50%;
   background: red;
+}
+
+.winType {
+  display: block;
+  border: 1px solid black;
+  margin: auto;
+  margin-top: 10px;
+  padding: 1%;
+  border-radius: 4px;
+  width: 25%;
 }
