@@ -152,7 +152,7 @@ function placeInTable(y, x) {
 	//do not go to more win styles once game is started
 	// winStylesBtn.disabled = true;
 
-	const cell = document.getElementById(`${y}-${x}`);
+	let cell = document.getElementById(`${y}-${x}`);
 	cell.append(placed);
 }
 
@@ -209,7 +209,7 @@ function handleClick(evt) {
 
 		// check for tie
 		// check if all cells in board are filled; if so call, call endGame
-		if (htmlBoard.every((row) => row.every((cell) => cell))) {
+		if (htmlBoard.every((row) => row.every((cell) => cell)) && !checkForWin()) {
 			alertTimer = setInterval(endGame, 10, 'Tie!');
 		}
 

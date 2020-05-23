@@ -110,6 +110,7 @@ button:hover{
 /* pieces are div within game table cells: draw as colored circles */
 
 .piece.p1 {
+  position: relative;
   /* make into circles */
   margin: 5px;
   width: 80%;
@@ -119,6 +120,7 @@ button:hover{
 }
 
 .piece.p2 {
+  position: relative;
   /* make into circles */
   margin: 5px;
   width: 80%;
