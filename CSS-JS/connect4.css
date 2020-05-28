@@ -48,6 +48,13 @@ h1 {
   border: 1px solid red;
 }
 
+#winMessage {
+  display: none;
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 1.25em;
+}
+
 h3 {
   margin:0;
 }
@@ -110,7 +117,6 @@ button:hover{
 /* pieces are div within game table cells: draw as colored circles */
 
 .piece.p1 {
-  position: relative;
   /* make into circles */
   margin: 5px;
   width: 80%;
@@ -120,7 +126,6 @@ button:hover{
 }
 
 .piece.p2 {
-  position: relative;
   /* make into circles */
   margin: 5px;
   width: 80%;

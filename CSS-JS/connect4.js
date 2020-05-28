@@ -32,9 +32,9 @@ let currPlayer; // active player: 1 or 2
 let htmlBoard = []; // array of rows, each row is array of cells  (htmlBoard[y][x])
 
 //prevent click event function if gameOver = true
-let gameOver;
+let gameOver = false; //if true, cannot play another piece
 
-let alertTimer;
+let winMessage = document.querySelector('#winMessage');
 
 newGame();
 
@@ -50,6 +50,8 @@ function newGame() {
 	// hover row is color of corresponding player
 	let topRow = document.getElementById('columnTop');
 	topRow.classList.add(currPlayer === 1 ? 'column-top-p1' : 'column-top-p2');
+
+	winMessage.style.display = 'none';
 
 	// if users prefer that the boxes become unchecked with a new game
 	// if (squareCheckbox.checked) {
@@ -72,6 +74,8 @@ function newPlayers() {
 	// hover row is color of corresponding player
 	let topRow = document.getElementById('columnTop');
 	topRow.classList.add(currPlayer === 1 ? 'column-top-p1' : 'column-top-p2');
+
+	winMessage.style.display = 'none';
 
 	if (squareCheckbox.checked) {
 		squareCheckbox.click();
@@ -158,10 +162,11 @@ function placeInTable(y, x) {
 
 /** endGame: announce game end */
 function endGame(msg) {
-	//pop up alert message
-	alert(msg);
+	setTimeout(() => {
+		winMessage.style.display = 'block';
+		winMessage.innerText = msg;
+	}, 70);
 	gameOver = true;
-	clearInterval(alertTimer);
 
 	// remove hover color on game end
 	let topRow = document.getElementById('columnTop');
@@ -170,57 +175,58 @@ function endGame(msg) {
 
 /** handleClick: handle click of column top to play piece */
 function handleClick(evt) {
-	if (!gameOver) {
-		// get x from ID of clicked cell
-		const x = evt.target.id;
-
-		// get next spot in column (if none, ignore click)
-		const y = findSpotForCol(x);
-		if (y === null) {
-			return;
-		}
-
-		// place piece in board and add to HTML table
-		//position from htmlBoard declaration: currPlayer is there.
-		htmlBoard[y][x] = currPlayer;
-		placeInTable(y, x);
-
-		// check for win
-		if (checkForWin()) {
-			//wait until the piece is places before alerting
-			alertTimer = setInterval(endGame, 10, `Player ${currPlayer} won!`);
-
-			//incrementing score based on win
-			if (currPlayer === 1) {
-				if (!p1Score) {
-					p1Score = 0;
-				}
-				p1Score++;
-				p1ScoreDisplay.innerText = p1Score;
-			}
-			if (currPlayer === 2) {
-				if (!p2Score) {
-					p2Score = 0;
-				}
-				p2Score++;
-				p2ScoreDisplay.innerText = p2Score;
-			}
-		}
-
-		// check for tie
-		// check if all cells in board are filled; if so call, call endGame
-		if (htmlBoard.every((row) => row.every((cell) => cell)) && !checkForWin()) {
-			alertTimer = setInterval(endGame, 10, 'Tie!');
-		}
-
-		// switch players using ternary function
-		currPlayer = currPlayer === 1 ? 2 : 1;
-
-		//top row hover is current player color
-		let topRow = document.getElementById('columnTop');
-		topRow.classList.toggle('column-top-p1');
-		topRow.classList.toggle('column-top-p2');
+	if (gameOver) {
+		return;
 	}
+	// get x from ID of clicked cell
+	const x = evt.target.id;
+
+	// get next spot in column (if none, ignore click)
+	const y = findSpotForCol(x);
+	if (y === null) {
+		return;
+	}
+
+	// place piece in board and add to HTML table
+	//position from htmlBoard declaration: currPlayer is there.
+	htmlBoard[y][x] = currPlayer;
+	placeInTable(y, x);
+
+	// check for win
+	if (checkForWin()) {
+		//wait until the piece is places before alerting
+		endGame(`Player ${currPlayer} Won!`);
+
+		//incrementing score based on win
+		if (currPlayer === 1) {
+			if (!p1Score) {
+				p1Score = 0;
+			}
+			p1Score++;
+			p1ScoreDisplay.innerText = p1Score;
+		}
+		if (currPlayer === 2) {
+			if (!p2Score) {
+				p2Score = 0;
+			}
+			p2Score++;
+			p2ScoreDisplay.innerText = p2Score;
+		}
+	}
+
+	// check for tie
+	// check if all cells in board are filled; if so call, call endGame
+	if (htmlBoard.every((row) => row.every((cell) => cell)) && !checkForWin()) {
+		alertTimer = setInterval(endGame, 70, 'Tie!');
+	}
+
+	// switch players using ternary function
+	currPlayer = currPlayer === 1 ? 2 : 1;
+
+	//top row hover is current player color
+	let topRow = document.getElementById('columnTop');
+	topRow.classList.toggle('column-top-p1');
+	topRow.classList.toggle('column-top-p2');
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
