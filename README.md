@@ -1,4 +1,4 @@
-# connect-
+# connect-4
 
 Available to play here: https://jake202020.github.io/connect-4/
 
